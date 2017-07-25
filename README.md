@@ -1,4 +1,4 @@
-# mass-video-file-encoder
+# Mass Video File Encoder / Converter
 
 This is an private and also my first project. Don't expect a beautiful UI.
 Encoder for mass video files using ffmpeg. Built for Windows in Lazarus IDE (https://www.lazarus-ide.org/). 
