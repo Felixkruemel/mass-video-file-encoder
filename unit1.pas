@@ -1,7 +1,7 @@
 unit Unit1;
-///////////////////////
-//////VERSION 1.2//////
-///////////////////////
+////////////////////////
+//////VERSION 1.21//////
+////////////////////////
 {$mode objfpc}{$H+}
 {$R project.rc}
 interface
@@ -96,8 +96,8 @@ begin
      filename1:=concat(SelectDirectoryDialog1.Filename,'\start.cmd');
      if Manual.Checked = false then
      begin
-          if H264.Checked then for i:= 0 to OpenDialog1.Files.count -1 do command[i]:=concat('ffmpeg -i "',filename[i],'" -vcodec libx264 -acodec libfaac -b:v 8000k -b:a 256k "Datei');
-          if H265.Checked then for i:= 0 to OpenDialog1.Files.count -1 do command[i]:=concat('ffmpeg -i "',filename[i],'" -vcodec libx265 -acodec libfaac -b:v 5000k -b:a 256k "Datei');
+          if H264.Checked then for i:= 0 to OpenDialog1.Files.count -1 do command[i]:=concat('ffmpeg -i "',filename[i],'" -vcodec libx264 -acodec aac -b:v 8000k -b:a 256k "Datei');
+          if H265.Checked then for i:= 0 to OpenDialog1.Files.count -1 do command[i]:=concat('ffmpeg -i "',filename[i],'" -vcodec libx265 -acodec aac -b:v 5000k -b:a 256k "Datei');
           AssignFile(f,filename1);
           Rewrite(f);
           for i:=0 to OpenDialog1.Files.count -1 do

@@ -9456,9 +9456,9 @@ object Form1: TForm1
     TabOrder = 4
   end
   object Label2: TLabel
-    Left = 205
+    Left = 200
     Height = 25
-    Top = 361
+    Top = 352
     Width = 104
     Caption = 'Chosen path:'
     ParentColor = False
@@ -9515,8 +9515,8 @@ object Form1: TForm1
     Left = 800
     Height = 28
     Top = 896
-    Width = 176
-    Caption = 'By Felixkruemel v1.0'
+    Width = 187
+    Caption = 'By Felixkruemel v1.21'
     Font.Color = clGrayText
     Font.Height = -20
     ParentColor = False

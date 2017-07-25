@@ -3,7 +3,7 @@ object Form1: TForm1
   Height = 933
   Top = 548
   Width = 995
-  Caption = 'Form1'
+  Caption = 'Mass File Encoder'
   ClientHeight = 933
   ClientWidth = 995
   DesignTimePPI = 144
@@ -9515,8 +9515,8 @@ object Form1: TForm1
     Left = 800
     Height = 28
     Top = 896
-    Width = 176
-    Caption = 'By Felixkruemel v1.2'
+    Width = 187
+    Caption = 'By Felixkruemel v1.21'
     Font.Color = clGrayText
     Font.Height = -20
     ParentColor = False
