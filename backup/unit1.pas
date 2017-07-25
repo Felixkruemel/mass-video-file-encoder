@@ -1,7 +1,9 @@
 unit Unit1;
-
+///////////////////////
+//////VERSION 1.1//////
+///////////////////////
 {$mode objfpc}{$H+}
-
+{$R project.rc}
 interface
 
 uses
@@ -16,6 +18,7 @@ type
     Edit1: TEdit;
     Label2: TLabel;
     Label3: TLabel;
+    Label4: TLabel;
     Label5: TLabel;
     Pfad: TListBox;
     H264: TRadioButton;
@@ -111,7 +114,7 @@ begin
        Rewrite(f);
        for i:=0 to OpenDialog1.Files.count -1 do
           begin
-            Writeln(f,'ffmpeg -i "',filename[i],'" ',Edit1.text,'"File',i,'.mkv"');
+            Writeln(f,'ffmpeg -i "',filename[i],'" ',Edit1.text,' "File',i,'.mkv"');
           end;
        CloseFile(f);
      end;
@@ -135,6 +138,7 @@ end;
 begin
  check1:=false;
  check2:=false;
+
 
 
 

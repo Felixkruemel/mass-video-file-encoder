@@ -1,9 +1,9 @@
 unit Unit1;
 ///////////////////////
-//////VERSION 1.0//////
+//////VERSION 1.2//////
 ///////////////////////
 {$mode objfpc}{$H+}
-
+{$R project.rc}
 interface
 
 uses
@@ -114,7 +114,7 @@ begin
        Rewrite(f);
        for i:=0 to OpenDialog1.Files.count -1 do
           begin
-            Writeln(f,'ffmpeg -i "',filename[i],'" ',Edit1.text,'"File',i,'.mkv"');
+            Writeln(f,'ffmpeg -i "',filename[i],'" ',Edit1.text,' "File',i,'.mkv"');
           end;
        CloseFile(f);
      end;
