@@ -6,4 +6,4 @@ Encoder for mass video files using ffmpeg. Built for Windows in Lazarus IDE (htt
 
 You can get the latest pre-compiled version here: https://www.magentacloud.de/share/yt27ojrpfn
 
-To work you need to compile or download an pre-compiled version of ffmpeg (visit ffmpeg.org). Just put it in your chosen directory path.
+To work you need to compile or download an pre-compiled version of ffmpeg (visit http://ffmpeg.org). Just put it in your chosen directory path.
