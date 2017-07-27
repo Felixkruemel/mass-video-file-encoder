@@ -1,11 +1,12 @@
 object Form1: TForm1
-  Left = 1749
+  Left = 7
   Height = 933
-  Top = 548
+  Top = 15
   Width = 995
   Caption = 'Mass File Encoder'
   ClientHeight = 933
   ClientWidth = 995
+  Color = clWindow
   DesignTimePPI = 144
   Icon.Data = {
     3B9604000000010001000000000001002000259604001600000089504E470D0A
@@ -9430,10 +9431,10 @@ object Form1: TForm1
     ParentColor = False
   end
   object Start: TButton
-    Left = 16
+    Left = 200
     Height = 178
-    Top = 696
-    Width = 892
+    Top = 704
+    Width = 772
     Caption = 'Start'
     OnClick = StartClick
     TabOrder = 2
@@ -9521,6 +9522,25 @@ object Form1: TForm1
     Font.Height = -20
     ParentColor = False
     ParentFont = False
+  end
+  object Settings: TButton
+    Left = 32
+    Height = 177
+    Top = 704
+    Width = 154
+    Caption = 'Preset Settings'
+    OnClick = SettingsClick
+    TabOrder = 9
+  end
+  object Testbutton: TButton
+    Left = 195
+    Height = 25
+    Top = 656
+    Width = 75
+    Caption = 'Testbutton'
+    OnClick = TestbuttonClick
+    TabOrder = 10
+    Visible = False
   end
   object OpenDialog1: TOpenDialog
   end

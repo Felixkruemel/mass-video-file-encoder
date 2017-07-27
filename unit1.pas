@@ -7,7 +7,7 @@ unit Unit1;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls, ShellAPI, Process;
+  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls, Process;
 
 type
 
@@ -15,6 +15,8 @@ type
 
   TForm1 = class(TForm)
     Button1: TButton;
+    Testbutton: TButton;
+    Settings: TButton;
     Edit1: TEdit;
     Label2: TLabel;
     Label3: TLabel;
@@ -33,12 +35,19 @@ type
     procedure Button1Click(Sender: TObject);
     procedure DirectoryClick(Sender: TObject);
     procedure Edit1Change(Sender: TObject);
+    procedure SettingsClick(Sender: TObject);
     procedure StartClick(Sender: TObject);
+    procedure TestbuttonClick(Sender: TObject);
     private
 
 
   public
-
+     const NVENC2: boolean =true;
+     const CUDA2: boolean =true;
+     const AAC2: boolean =true;
+     const Opus2: boolean =true;
+     const Bitratev2: string = '8000k';
+     const Bitratea2: string = '256k';
   end;
 
 var
@@ -48,14 +57,15 @@ var
   i:longint;
   stringlist: TStringList;
   f:TEXTfile;
-  filename1,exe,dir:string;
+  filename1,exe,dir,CODECV,CODECA:string;
   check1,check2:boolean ;
   program1:TProcess;
 
 implementation
 
 {$R *.lfm}
-
+uses
+  Unit2;
 { TForm1 }
 
 procedure TForm1.Button1Click(Sender: TObject);
@@ -88,6 +98,11 @@ begin
   Manual.State:=cbChecked;
 end;
 
+procedure TForm1.SettingsClick(Sender: TObject);
+begin
+  Form2.ShowModal;
+end;
+
 
 procedure TForm1.StartClick(Sender: TObject);
 begin
@@ -96,17 +111,41 @@ begin
      filename1:=concat(SelectDirectoryDialog1.Filename,'\start.cmd');
      if Manual.Checked = false then
      begin
-          if H264.Checked then for i:= 0 to OpenDialog1.Files.count -1 do command[i]:=concat('ffmpeg -i "',filename[i],'" -vcodec libx264 -acodec aac -b:v 8000k -b:a 256k "Datei');
-          if H265.Checked then for i:= 0 to OpenDialog1.Files.count -1 do command[i]:=concat('ffmpeg -i "',filename[i],'" -vcodec libx265 -acodec aac -b:v 5000k -b:a 256k "Datei');
+
+//////////////////////////////////////////////////////////////////////////////
+
+          if (NVENC2=true) and (H264.Checked) then CODECV:='h264_nvenc';
+          if (NVENC2=false) and (H264.Checked) then CODECV:='libx264';
+          if (NVENC2=true) and (H265.Checked) then CODECV:='hevc_nvenc';
+          if (NVENC2=false) and (H265.Checked) then CODECV:='libx265';
+          if AAC2=true then CODECA:='aac';
+          if Opus2=true then CODECA:='opus';
+
+//////////////////////////////////////////////////////////////////////////////
+
+          if CUDA2 = false then
+          begin
+              if H264.Checked then for i:= 0 to OpenDialog1.Files.count -1 do command[i]:=concat(' -i "',filename[i],'" -vcodec ',CODECV,' -acodec ',CODECA,' -b:v ',Bitratev2,' -b:a ',Bitratea2,' "Datei');
+              if H265.Checked then for i:= 0 to OpenDialog1.Files.count -1 do command[i]:=concat(' -i "',filename[i],'" -vcodec ',CODECV,' -acodec ',CODECA,' -b:v ',Bitratev2,' -b:a ',Bitratea2,' "Datei');
+          end;
+          if CUDA2 = true then
+          begin
+             if H264.Checked then for i:= 0 to OpenDialog1.Files.count -1 do command[i]:=concat(' -hwaccel cuvid -i "',filename[i],'" -vcodec ',CODECV,' -acodec ',CODECA,' -b:v ',Bitratev2,' -b:a ',Bitratea2,' "Datei');
+             if H265.Checked then for i:= 0 to OpenDialog1.Files.count -1 do command[i]:=concat(' -hwaccel cuvid -i "',filename[i],'" -vcodec ',CODECV,' -acodec ',CODECA,' -b:v ',Bitratev2,' -b:a ',Bitratea2,' "Datei');
+          end;
+
+//////////////////////////////////////////////////////////////////////////////
           AssignFile(f,filename1);
           Rewrite(f);
           for i:=0 to OpenDialog1.Files.count -1 do
           begin
-            Writeln(f,command[i],i,'.mkv"');
+            Writeln(f,'"',SelectDirectoryDialog1.Filename,'\ffmpeg"', command[i],i,'.mkv"');
           end;
- //     writeln (f,'pause');
+      writeln (f,'pause');
       CloseFile(f);
      end;
+///////////////////////////////////////////////////////////////////////////////
+//////////////////////////MANUAL///////////////////////////////////////////////
 
      if Manual.Checked = true then
      begin
@@ -114,11 +153,12 @@ begin
        Rewrite(f);
        for i:=0 to OpenDialog1.Files.count -1 do
           begin
-            Writeln(f,'ffmpeg -i "',filename[i],'" ',Edit1.text,' "File',i,'.mkv"');
+            Writeln(f,'"',SelectDirectoryDialog1.Filename,'\ffmpeg" -i "',filename[i],'" ',Edit1.text,' "File',i,'.mkv"');
           end;
        CloseFile(f);
      end;
 
+///////////////////////////////////////////////////////////////////////////////
 
 
       exe:=concat('"',SelectDirectoryDialog1.Filename,'\start.cmd"');
@@ -131,6 +171,13 @@ begin
    end;
    if (check1 = false) or (check2= false) then
    showmessage('Bitte zuerst die Dateien und den Pfad auswählen!');
+end;
+
+procedure TForm1.TestbuttonClick(Sender: TObject);
+begin
+  if CUDA2= true then showmessage('NVENC = true');
+  if CUDA2= false then showmessage('NVENC = false');
+ // showmessage(Bitratev2);
 end;
 
 

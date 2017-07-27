@@ -1,0 +1,124 @@
+object Form2: TForm2
+  Left = 1764
+  Height = 666
+  Top = 237
+  Width = 489
+  Caption = 'Mass File Encoder - Settings'
+  ClientHeight = 666
+  ClientWidth = 489
+  Color = clWindow
+  DesignTimePPI = 144
+  LCLVersion = '1.8.0.3'
+  object Save: TButton
+    Left = 20
+    Height = 112
+    Top = 536
+    Width = 436
+    Caption = 'Save and Close'
+    OnClick = SaveClick
+    TabOrder = 0
+  end
+  object NVENC: TCheckBox
+    Left = 56
+    Height = 29
+    Hint = 'If active and supported: Much faster encoding (up to 10x faster than normal)'
+    Top = 48
+    Width = 239
+    HelpType = htKeyword
+    Caption = 'Use NVENC GPU encoding'
+    OnChange = NVENCChange
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 1
+  end
+  object Label1: TLabel
+    Left = 32
+    Height = 25
+    Top = 184
+    Width = 115
+    Caption = 'Video Settings'
+    ParentColor = False
+  end
+  object CUDA: TCheckBox
+    Left = 56
+    Height = 29
+    Hint = 'If active and supported: Slightly faster decoding'
+    Top = 96
+    Width = 231
+    Caption = 'Use CUDA GPU decoding'
+    OnChange = CUDAChange
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 2
+  end
+  object Label2: TLabel
+    Left = 32
+    Height = 25
+    Top = 8
+    Width = 414
+    Caption = 'Coding options - require Nonfree compiled FFmpeg'
+    ParentColor = False
+  end
+  object Label3: TLabel
+    Left = 32
+    Height = 25
+    Top = 336
+    Width = 117
+    Caption = 'Audio Settings'
+    ParentColor = False
+  end
+  object Bitratev: TEdit
+    Left = 136
+    Height = 33
+    Top = 224
+    Width = 112
+    OnChange = BitratevChange
+    TabOrder = 3
+    Text = '8000k'
+  end
+  object Label4: TLabel
+    Left = 56
+    Height = 25
+    Top = 224
+    Width = 54
+    Caption = 'Bitrate:'
+    ParentColor = False
+  end
+  object AAC: TRadioButton
+    Left = 56
+    Height = 29
+    Top = 376
+    Width = 65
+    Caption = 'AAC'
+    Checked = True
+    OnChange = AACChange
+    TabOrder = 6
+    TabStop = True
+  end
+  object Opus: TRadioButton
+    Left = 56
+    Height = 29
+    Top = 416
+    Width = 73
+    Caption = 'Opus'
+    OnChange = OpusChange
+    TabOrder = 4
+  end
+  object Bitratea: TEdit
+    Left = 136
+    Height = 33
+    Top = 456
+    Width = 112
+    OnChange = BitrateaChange
+    TabOrder = 5
+    Text = '256k'
+  end
+  object Label99: TLabel
+    Left = 56
+    Height = 25
+    Top = 456
+    Width = 50
+    Caption = 'Bitrate'
+    ParentColor = False
+  end
+end
