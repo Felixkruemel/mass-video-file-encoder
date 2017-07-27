@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 7
+  Left = 338
   Height = 933
-  Top = 15
+  Top = 645
   Width = 995
   Caption = 'Mass File Encoder'
   ClientHeight = 933

@@ -121,4 +121,51 @@ object Form2: TForm2
     Caption = 'Bitrate'
     ParentColor = False
   end
+  object Container: TGroupBox
+    Left = 296
+    Height = 129
+    Top = 184
+    Width = 185
+    Caption = 'Container'
+    ClientHeight = 99
+    ClientWidth = 181
+    TabOrder = 7
+    object MKV: TRadioButton
+      Left = 16
+      Height = 29
+      Top = 8
+      Width = 67
+      Caption = 'MKV'
+      Checked = True
+      OnChange = MKVChange
+      TabOrder = 1
+      TabStop = True
+    end
+    object MP4: TRadioButton
+      Left = 16
+      Height = 29
+      Top = 48
+      Width = 66
+      Caption = 'MP4'
+      OnChange = MP4Change
+      TabOrder = 0
+    end
+  end
+  object Prefix: TEdit
+    Left = 312
+    Height = 33
+    Top = 456
+    Width = 160
+    OnChange = PrefixChange
+    TabOrder = 8
+    Text = 'File'
+  end
+  object Label5: TLabel
+    Left = 312
+    Height = 25
+    Top = 424
+    Width = 118
+    Caption = 'Filename Prefix'
+    ParentColor = False
+  end
 end

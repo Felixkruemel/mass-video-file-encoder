@@ -48,6 +48,9 @@ type
      const Opus2: boolean =true;
      const Bitratev2: string = '8000k';
      const Bitratea2: string = '256k';
+     const MP42: boolean =true;
+     const MKV2: boolean =true;
+     const Prefix2: string = 'File';
   end;
 
 var
@@ -57,7 +60,7 @@ var
   i:longint;
   stringlist: TStringList;
   f:TEXTfile;
-  filename1,exe,dir,CODECV,CODECA:string;
+  filename1,exe,dir,CODECV,CODECA,cont:string;
   check1,check2:boolean ;
   program1:TProcess;
 
@@ -120,18 +123,20 @@ begin
           if (NVENC2=false) and (H265.Checked) then CODECV:='libx265';
           if AAC2=true then CODECA:='aac';
           if Opus2=true then CODECA:='opus';
+          if MKV2= true then Cont:='mkv';
+          if MP42= true then Cont:='mp4';
 
 //////////////////////////////////////////////////////////////////////////////
 
           if CUDA2 = false then
           begin
-              if H264.Checked then for i:= 0 to OpenDialog1.Files.count -1 do command[i]:=concat(' -i "',filename[i],'" -vcodec ',CODECV,' -acodec ',CODECA,' -b:v ',Bitratev2,' -b:a ',Bitratea2,' "Datei');
-              if H265.Checked then for i:= 0 to OpenDialog1.Files.count -1 do command[i]:=concat(' -i "',filename[i],'" -vcodec ',CODECV,' -acodec ',CODECA,' -b:v ',Bitratev2,' -b:a ',Bitratea2,' "Datei');
+              if H264.Checked then for i:= 0 to OpenDialog1.Files.count -1 do command[i]:=concat(' -i "',filename[i],'" -vcodec ',CODECV,' -acodec ',CODECA,' -b:v ',Bitratev2,' -b:a ',Bitratea2,' "',Prefix2);
+              if H265.Checked then for i:= 0 to OpenDialog1.Files.count -1 do command[i]:=concat(' -i "',filename[i],'" -vcodec ',CODECV,' -acodec ',CODECA,' -b:v ',Bitratev2,' -b:a ',Bitratea2,' "',Prefix2);
           end;
           if CUDA2 = true then
           begin
-             if H264.Checked then for i:= 0 to OpenDialog1.Files.count -1 do command[i]:=concat(' -hwaccel cuvid -i "',filename[i],'" -vcodec ',CODECV,' -acodec ',CODECA,' -b:v ',Bitratev2,' -b:a ',Bitratea2,' "Datei');
-             if H265.Checked then for i:= 0 to OpenDialog1.Files.count -1 do command[i]:=concat(' -hwaccel cuvid -i "',filename[i],'" -vcodec ',CODECV,' -acodec ',CODECA,' -b:v ',Bitratev2,' -b:a ',Bitratea2,' "Datei');
+             if H264.Checked then for i:= 0 to OpenDialog1.Files.count -1 do command[i]:=concat(' -hwaccel cuvid -i "',filename[i],'" -vcodec ',CODECV,' -acodec ',CODECA,' -b:v ',Bitratev2,' -b:a ',Bitratea2,' "',Prefix2);
+             if H265.Checked then for i:= 0 to OpenDialog1.Files.count -1 do command[i]:=concat(' -hwaccel cuvid -i "',filename[i],'" -vcodec ',CODECV,' -acodec ',CODECA,' -b:v ',Bitratev2,' -b:a ',Bitratea2,' "',Prefix2);
           end;
 
 //////////////////////////////////////////////////////////////////////////////
@@ -139,7 +144,7 @@ begin
           Rewrite(f);
           for i:=0 to OpenDialog1.Files.count -1 do
           begin
-            Writeln(f,'"',SelectDirectoryDialog1.Filename,'\ffmpeg"', command[i],i,'.mkv"');
+            Writeln(f,'"',SelectDirectoryDialog1.Filename,'\ffmpeg"', command[i],i,'.',cont,'"');
           end;
       writeln (f,'pause');
       CloseFile(f);
@@ -153,7 +158,7 @@ begin
        Rewrite(f);
        for i:=0 to OpenDialog1.Files.count -1 do
           begin
-            Writeln(f,'"',SelectDirectoryDialog1.Filename,'\ffmpeg" -i "',filename[i],'" ',Edit1.text,' "File',i,'.mkv"');
+            Writeln(f,'"',SelectDirectoryDialog1.Filename,'\ffmpeg" -i "',filename[i],'" ',Edit1.text,' "',Prefix2,i,'.',cont,'"');
           end;
        CloseFile(f);
      end;
@@ -175,8 +180,8 @@ end;
 
 procedure TForm1.TestbuttonClick(Sender: TObject);
 begin
-  if CUDA2= true then showmessage('NVENC = true');
-  if CUDA2= false then showmessage('NVENC = false');
+  if MP42= true then showmessage('true');
+  if MP42= false then showmessage('false');
  // showmessage(Bitratev2);
 end;
 

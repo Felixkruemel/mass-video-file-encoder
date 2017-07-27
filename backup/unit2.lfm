@@ -1,7 +1,7 @@
 object Form2: TForm2
-  Left = 1764
+  Left = 255
   Height = 666
-  Top = 237
+  Top = 26
   Width = 489
   Caption = 'Mass File Encoder - Settings'
   ClientHeight = 666
@@ -120,5 +120,35 @@ object Form2: TForm2
     Width = 50
     Caption = 'Bitrate'
     ParentColor = False
+  end
+  object Container: TGroupBox
+    Left = 296
+    Height = 129
+    Top = 336
+    Width = 185
+    Caption = 'Container'
+    ClientHeight = 99
+    ClientWidth = 181
+    TabOrder = 7
+    object MKV: TRadioButton
+      Left = 16
+      Height = 29
+      Top = 8
+      Width = 67
+      Caption = 'MKV'
+      Checked = True
+      OnChange = MKVChange
+      TabOrder = 1
+      TabStop = True
+    end
+    object MP4: TRadioButton
+      Left = 16
+      Height = 29
+      Top = 48
+      Width = 66
+      Caption = 'MP4'
+      OnChange = MP4Change
+      TabOrder = 0
+    end
   end
 end
